@@ -78,6 +78,7 @@ if __name__ == "__main__":
 		# splitting the uinput in 2 strings and access the first string 
 		if uinput.split(" ", 1)[0] == "st": 
 			songName = uinput.split(" ", 1)[1] 
+			print(songName)
 			stream(songName) 
 
 		# elif uinput == "track": 
