@@ -21,11 +21,11 @@ driver.install_addon(extension1, temporary=True)
 def stream(MusicName): 
 	driver.get(f"https://www.youtube.com/results?search_query={MusicName}") 
 	driver.implicitly_wait(0.5) 
+	print(driver.session_id == 'None')
 	video = driver.find_element( 
 		"xpath", "/html/body/ytd-app/div[1]/ytd-page-manager/ytd-search/div[1]/ytd-two-column-search-results-renderer/div[1]/ytd-section-list-renderer/div[2]/ytd-item-section-renderer/div[3]/ytd-video-renderer[1]/div[1]/div/div[1]/div/h3/a/yt-formatted-string") 
-	video.click() 
-	videotime = driver.find_element(By.XPATH,"//span[@class='ytp-time-duration']")   
-	print(videotime.text)
+	video.click()
+	return True
 
 def stop(): 
 	driver.quit() 
@@ -48,5 +48,3 @@ if __name__ == "__main__":
 				print("invalid command") 
 		except:
 			stop()
-
-		# if(driver.session_id == 'None'):

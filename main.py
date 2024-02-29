@@ -5,7 +5,7 @@ import base64
 from function import stream, stop
 
 def gifload(path):
-    file_ = open("assets/images/music.gif", "rb")
+    file_ = open(path, "rb")
     contents = file_.read()
     data_url = base64.b64encode(contents).decode("utf-8")
     file_.close()
@@ -38,22 +38,17 @@ with st.form('my_form'):
     with row2col2:
         submitted = st.form_submit_button('Search')
 
-if submitted:
-    stream(inp)
-    stopbtn = st.button('Stop')
+data_url = gifload("assets/images/music.gif")
 
-    if stopbtn:
-        stop()
+if submitted:
+    running = stream(inp)
+    if running:
+        st.markdown(f'<img src="data:image/gif;base64,{data_url}" class="gifimg" alt="musicgif">',unsafe_allow_html=True)
+        st.button('Stop', on_click=stop)
 
 # file_ = open("assets/images/music.gif", "rb")
 # contents = file_.read()
 # data_url = base64.b64encode(contents).decode("utf-8")
 # file_.close()
 
-data_url = gifload("assets/images/music.gif")
-
-st.markdown(
-    f'<img src="data:image/gif;base64,{data_url}" class="gifimg" alt="musicgif">',
-    unsafe_allow_html=True,
-)
     
