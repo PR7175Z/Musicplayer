@@ -1,7 +1,6 @@
 import streamlit as st
 import streamlit.components.v1 as components
 from streamlit.components.v1 import html
-import base64
 
 def login():
     with st.form('loginform',clear_on_submit=False):
@@ -10,8 +9,6 @@ def login():
         password = st.text_input(' ', placeholder='Password', type="password")
         submitted = st.form_submit_button('Submit')
         st.write("<a href='#' id='my-link'>Forgot Password</a>", unsafe_allow_html=True)
-        
-    st.button('Sign Up')
 
     if submitted:
         if len(uname)==0:

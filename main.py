@@ -3,29 +3,15 @@ import streamlit.components.v1 as components
 from streamlit.components.v1 import html
 import login
 from seleniumfn import stream, stop
-from function import gifload
+from function import *
+import signup
 
-st.markdown(
-    '''
-    <style>
-        button[title="View fullscreen"]{
-            visibility: hidden;
-        }
-        .gifimg{
-            width: 500px;
-        }
-    </style>
-    ''',unsafe_allow_html=True
-)
-
-row1col1, row1col2 = st.columns([0.1, 0.9])
-with row1col1:
-    st.image("assets/images/logo.png", width=64)
-with row1col2:
-    st.markdown('<h1 class="pagetitle">Music Player</h1>',
-                unsafe_allow_html=True)
+header()
 
 login.login()
+signup_button = st.button('Sign Up')
+if signup_button:
+    signup.signup()
 
 with st.form('searchform'):
     row2col1, row2col2 = st.columns([0.8, 0.2])
