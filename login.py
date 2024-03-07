@@ -17,5 +17,5 @@ def login():
             st.write('Password field is empty')
         print(uname, password)
 
-
-    
+if __name__ == "__main__":
+    login()

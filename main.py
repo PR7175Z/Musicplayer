@@ -6,6 +6,8 @@ from seleniumfn import stream, stop
 from function import *
 import signup
 
+loggedin = False
+
 header()
 
 login.login()

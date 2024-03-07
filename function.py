@@ -3,6 +3,8 @@ import streamlit.components.v1 as components
 from streamlit.components.v1 import html
 from pathlib import Path
 import base64
+import psycopg2
+from config import load_config
 
 #show header logo and title
 def img_to_bytes(img_path):
@@ -49,3 +51,36 @@ def gifload(path):
     data_url = base64.b64encode(contents).decode("utf-8")
     file_.close()
     return data_url
+
+# inserting user in db
+def insert_user(first_name, last_name, email, password):
+    """ Insert a new vendor into the vendors table """
+
+    sql = """INSERT INTO users(first_name,last_name, email, password)
+             VALUES(%s, %s, %s, %s) RETURNING user_id;"""
+    
+    user_id = None
+    config = load_config()
+
+    try:
+        with  psycopg2.connect(**config) as conn:
+            with  conn.cursor() as cur:
+                # execute the INSERT statement
+                cur.execute(sql, (first_name,last_name, email, password))
+
+                # get the generated id back                
+                rows = cur.fetchone()
+                if rows:
+                    user_id = rows[0]
+
+                # commit the changes to the database
+                conn.commit()
+    except (Exception, psycopg2.DatabaseError) as error:
+        print(error)    
+    finally:
+        return user_id
+    
+
+if __name__ == "__main__":
+    insert_user("adam", "eve", "adameve@gmail.com", "test")
+    
