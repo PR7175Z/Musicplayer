@@ -18,6 +18,7 @@ def img_to_html(img_path, classname):
     )
     return img_html
 
+#function fro the header call
 def header():
 	logo = 'assets/images/logo.png'
 	st.markdown(
@@ -54,8 +55,6 @@ def gifload(path):
 
 # inserting user in db
 def insert_user(first_name, last_name, email, password):
-    """ Insert a new vendor into the vendors table """
-
     sql = """INSERT INTO users(first_name,last_name, email, password)
              VALUES(%s, %s, %s, %s) RETURNING user_id;"""
     
@@ -80,7 +79,27 @@ def insert_user(first_name, last_name, email, password):
     finally:
         return user_id
     
+#Retrieve data from the users table
+def get_users():
+    config  = load_config()
+    userdata = []
+    try:
+        with psycopg2.connect(**config) as conn:
+            with conn.cursor() as cur:
+                cur.execute("SELECT user_id, email, password FROM users")
+                # print("The number of parts: ", cur.rowcount)
+                row = cur.fetchone()
+
+                while row is not None:
+                    userdata.append(row)
+                    row = cur.fetchone()
+                return userdata
+
+    except (Exception, psycopg2.DatabaseError) as error:
+        print(error)
+
 
 if __name__ == "__main__":
-    insert_user("adam", "eve", "adameve@gmail.com", "test")
+    # insert_user("adam", "eve", "adameve@gmail.com", "test")
+    print(get_users())
     
