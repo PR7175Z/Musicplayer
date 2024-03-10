@@ -53,6 +53,19 @@ def gifload(path):
     file_.close()
     return data_url
 
+#encode password
+def encode_password(password):
+    password_bytes = password.encode("ascii") 
+    base64_password = base64.b64encode(password_bytes) 
+    encoded_password = base64_password.decode("ascii") 
+    return encoded_password
+
+def decode_password(password):
+    password_bytes = password.encode("ascii") 
+    base64_password = base64.b64decode(password_bytes) 
+    decoded_password = base64_password.decode("ascii") 
+    return decoded_password
+
 # inserting user in db
 def insert_user(first_name, last_name, email, password):
     sql = """INSERT INTO users(first_name,last_name, email, password)
