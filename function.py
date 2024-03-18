@@ -18,7 +18,7 @@ def img_to_html(img_path, classname):
     )
     return img_html
 
-#function fro the header call
+#function for the header call
 def header():
 	logo = 'assets/images/logo.png'
 	st.markdown(
@@ -38,8 +38,6 @@ def header():
 	)
 	row1col1, row1col2 = st.columns([0.1, 0.9])
 	with row1col1:
-		# logo = '/assets/images/logo.png'
-		# st.markdown(f'<img src="{logo}" class="logoimage">', unsafe_allow_html=True)
 		st.markdown(img_to_html(logo, classname='logoimage'), unsafe_allow_html=True)
 	with row1col2:
 		st.markdown('<h1 class="pagetitle">Music Player</h1>',

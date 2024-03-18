@@ -1,32 +1,44 @@
 import streamlit as st
 import streamlit.components.v1 as components
 from streamlit.components.v1 import html
+from streamlit_js_eval import streamlit_js_eval
+
 import login
 from seleniumfn import stream, stop
 from function import *
 import signup
 
 loggedin = False
+st.set_page_config(
+    page_title="Music Player",
+    page_icon="🎵",
+)
 
 header()
 
-status = login.login()
-# print(status)
-signup_button = st.button('Sign Up')
-if signup_button:
-    signup.signup()
+login_placeholder = st.empty()
+signup_clicked = False
+with login_placeholder.container():
+    status = login.login()
+    signup_button = st.button('Sign Up')
+
+if not status:
+    if signup_button:
+        login_placeholder.empty()
+        signup.signup()
+        signup_clicked = True
 
 if status:
-    with st.form('searchform'):
+    with st.form('searchform', clear_on_submit=False):
         row2col1, row2col2 = st.columns([0.8, 0.2])
         with row2col1:
             inp = st.text_input(' ', placeholder='Search Here...')
         with row2col2:
-            submitted = st.form_submit_button('Search')
+            searched = st.form_submit_button('Search')
 
     data_url = gifload("assets/images/music.gif")
 
-    if submitted:
+    if searched:
         running = stream(inp)
         if running:
             st.markdown(f'<img src="data:image/gif;base64,{data_url}" class="gifimg" alt="musicgif">',unsafe_allow_html=True)
