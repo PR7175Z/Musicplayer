@@ -10,11 +10,11 @@ def signup():
         last_name = st.text_input(' ', placeholder='Last Name', max_chars=20 )
         email = st.text_input(' ', placeholder='Email', max_chars=80)
         password = st.text_input(' ', placeholder='Password', type="password")
-        submitted = st.form_submit_button('Submit')
+        signuped = st.form_submit_button('Submit')
         
     st.button('Login')
 
-    if submitted:
+    if signuped:
         if(len(email)==0 or len(password)==0 or len(first_name)==0 or len(last_name)==0):
             if len(email)==0:
                 st.write('Username field is empty')

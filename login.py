@@ -28,17 +28,17 @@ def login():
         st.write("<h2>Login</h2>", unsafe_allow_html=True)
         email = st.text_input(' ', placeholder='Username', max_chars=60)
         password = st.text_input(' ', placeholder='Password', type="password")
-        submitted = st.form_submit_button('Submit')
+        loggedin = st.form_submit_button('Submit')
         st.write("<a href='#' id='my-link'>Forgot Password</a>", unsafe_allow_html=True)
 
-    if submitted:
+    if loggedin:
         corflag = checkcredential(email, password)
         if corflag==1:
-            print('login successful')
+            # print('login successful')
             placeholder.empty()
             return True
         else:
-            print('invalid credential')
+            # print('invalid credential')
             return False
         
 
