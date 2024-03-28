@@ -34,7 +34,6 @@ def pauseAndPlay(driver=driver):
 
 def stop(driver=driver): 
 	driver.quit() 
-	exit()
 
 # we need to use Stream {songname} for our player to stream the song 
 if __name__ == "__main__": 
