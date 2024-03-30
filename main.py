@@ -16,38 +16,19 @@ st.set_page_config(
 
 header()
 
-# login_placeholder = st.empty()
-# signup_clicked = False
-# with login_placeholder.container():
-#     status = login()
-#     signup_button = st.button('Sign Up')
+login_placeholder = st.empty()
+signup_clicked = False
+with login_placeholder.container():
+    login()
+    signup_button = st.button('Sign Up')
 
-# if not status:
-#     if signup_button:
-#         login_placeholder.empty()
-#         signup()
-#         signup_clicked = True
+# login_placeholder.empty() 
 
-# if status:
-#     with st.form('searchform', clear_on_submit=False):
-#         row2col1, row2col2 = st.columns([0.8, 0.2])
-#         with row2col1:
-#             inp = st.text_input(' ', placeholder='Search Here...')
-#         with row2col2:
-#             searched = st.form_submit_button('Search')
+if signup_button:
+    login_placeholder.empty()
+    signup()
+    signup_clicked = True
 
-#         print(inp)
-
-#     data_url = gifload("assets/images/music.gif")
-
-#     if searched:
-#         print("working")
-#         running = stream(inp)
-#         if running:
-#             st.markdown(f'<img src="data:image/gif;base64,{data_url}" class="gifimg" alt="musicgif">',unsafe_allow_html=True)
-#             st.button('Stop', on_click=stop)
-
-    
 with st.form('searchform', clear_on_submit=False):
     row2col1, row2col2 = st.columns([0.8, 0.2])
     with row2col1:
@@ -55,10 +36,44 @@ with st.form('searchform', clear_on_submit=False):
     with row2col2:
         searched = st.form_submit_button('Search')
 
+    print(inp)
+
 data_url = gifload("assets/images/music.gif")
 
 if searched:
+    print("working")
     running = stream(inp)
     if running:
         st.markdown(f'<img src="data:image/gif;base64,{data_url}" class="gifimg" alt="musicgif">',unsafe_allow_html=True)
-        st.button('Pause', on_click=pauseAndPlay)
+        st.button('Stop', on_click=pauseAndPlay)
+
+
+# # login_placeholder = st.empty()
+# signup_clicked = False
+
+# status=login()
+# print(status)
+# signup_button = st.button('Sign Up')
+
+# if signup_button:
+#     signup()
+#     signup_clicked = True
+
+
+# with st.form('searchform', clear_on_submit=False):
+#     row2col1, row2col2 = st.columns([0.8, 0.2])
+#     with row2col1:
+#         inp = st.text_input(' ', placeholder='Search Here...')
+#     with row2col2:
+#         searched = st.form_submit_button('Search')
+
+#     print(inp)
+
+# data_url = gifload("assets/images/music.gif")
+
+# if searched:
+#     print("working")
+#     running = stream(inp)
+#     if running:
+#         st.markdown(f'<img src="data:image/gif;base64,{data_url}" class="gifimg" alt="musicgif">',unsafe_allow_html=True)
+#         st.button('Stop', on_click=pauseAndPlay)
