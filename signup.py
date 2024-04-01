@@ -27,7 +27,6 @@ def signup():
             else:
                 insert_user(first_name, last_name, email, password)
                 st.write("Signup successful, you can now login")
-                # st.session_state.show_signup = False
                 st.session_state.signup_completed = True
                 st.session_state.show_login = True
                 st.session_state.logged_in = True
