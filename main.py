@@ -8,7 +8,6 @@ from seleniumfn import *
 from function import *
 from signup import *
 
-loggedin = False
 st.set_page_config(
     page_title="Music Player",
     page_icon="🎵",
@@ -16,36 +15,36 @@ st.set_page_config(
 
 header()
 
-login_placeholder = st.empty()
-signup_clicked = False
-with login_placeholder.container():
-    login()
-    signup_button = st.button('Sign Up')
+# login_placeholder = st.empty()
+# signup_clicked = False
+# with login_placeholder.container():
+#     login()
+#     signup_button = st.button('Sign Up')
 
-# login_placeholder.empty() 
+# # login_placeholder.empty() 
 
-if signup_button:
-    login_placeholder.empty()
-    signup()
-    signup_clicked = True
+# if signup_button:
+#     login_placeholder.empty()
+#     signup()
+#     signup_clicked = True
 
-with st.form('searchform', clear_on_submit=False):
-    row2col1, row2col2 = st.columns([0.8, 0.2])
-    with row2col1:
-        inp = st.text_input(' ', placeholder='Search Here...')
-    with row2col2:
-        searched = st.form_submit_button('Search')
+# with st.form('searchform', clear_on_submit=False):
+#     row2col1, row2col2 = st.columns([0.8, 0.2])
+#     with row2col1:
+#         inp = st.text_input(' ', placeholder='Search Here...')
+#     with row2col2:
+#         searched = st.form_submit_button('Search')
 
-    print(inp)
+#     print(inp)
 
-data_url = gifload("assets/images/music.gif")
+# data_url = gifload("assets/images/music.gif")
 
-if searched:
-    print("working")
-    running = stream(inp)
-    if running:
-        st.markdown(f'<img src="data:image/gif;base64,{data_url}" class="gifimg" alt="musicgif">',unsafe_allow_html=True)
-        st.button('Stop', on_click=pauseAndPlay)
+# if searched:
+#     print("working")
+#     running = stream(inp)
+#     if running:
+#         st.markdown(f'<img src="data:image/gif;base64,{data_url}" class="gifimg" alt="musicgif">',unsafe_allow_html=True)
+#         st.button('Stop', on_click=pauseAndPlay)
 
 
 # # login_placeholder = st.empty()
@@ -77,3 +76,42 @@ if searched:
 #     if running:
 #         st.markdown(f'<img src="data:image/gif;base64,{data_url}" class="gifimg" alt="musicgif">',unsafe_allow_html=True)
 #         st.button('Stop', on_click=pauseAndPlay)
+
+
+def session_state():
+    if 'logged_in' not in st.session_state:
+        st.session_state.logged_in = False
+        st.session_state.show_login = True
+        st.session_state.show_signup = False
+        st.session_state.signup_completed = False
+
+session_state()
+
+if not st.session_state.logged_in:
+    login()
+    signup_button = st.button('Sign Up')
+
+    if signup_button:
+        st.session_state.show_login = False
+        st.session_state.show_signup = True
+
+    if st.session_state.show_signup:
+        signup()
+else:
+    with st.form('searchform', clear_on_submit=False):
+        row2col1, row2col2 = st.columns([0.8, 0.2])
+        with row2col1:
+            inp = st.text_input(' ', placeholder='Search Here...')
+        with row2col2:
+            searched = st.form_submit_button('Search')
+
+        print(inp)
+
+    data_url = gifload("assets/images/music.gif")
+
+    if searched:
+        print("working")
+        running = stream(inp)
+        if running:
+            st.markdown(f'<img src="data:image/gif;base64,{data_url}" class="gifimg" alt="musicgif">',unsafe_allow_html=True)
+            st.button('Stop', on_click=pauseAndPlay)

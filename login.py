@@ -39,19 +39,18 @@ def checkcredential(email,password):
 #             return False
     
 def login():
-    corflag = 0
-    with st.form('loginform',clear_on_submit=False):
-        st.write("<h2>Login</h2>", unsafe_allow_html=True)
-        email = st.text_input(' ', placeholder='Username', max_chars=60)
-        password = st.text_input(' ', placeholder='Password', type="password")
-        loggedin = st.form_submit_button('Submit')
+    if st.session_state.show_login:
+        corflag = 0
+        with st.form('loginform',clear_on_submit=False):
+            st.write("<h2>Login</h2>", unsafe_allow_html=True)
+            email = st.text_input(' ', placeholder='Username', max_chars=60)
+            password = st.text_input(' ', placeholder='Password', type="password")
+            loggedin = st.form_submit_button('Submit')
 
-    if loggedin:
-        corflag = checkcredential(email, password)
-        if corflag==1:
-            return True
-        else:
-            return False 
+        if loggedin:
+            corflag = checkcredential(email, password)
+            if corflag==1:
+                st.session_state.logged_in = True
         
 
 if __name__ == "__main__":
