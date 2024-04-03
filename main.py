@@ -107,8 +107,6 @@ else:
         with row2col2:
             searched = st.form_submit_button('Search')
 
-        print(inp)
-
     data_url = gifload("assets/images/music.gif")
 
     if searched:
