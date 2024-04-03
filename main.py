@@ -87,6 +87,8 @@ def session_state():
 
 session_state()
 
+import time
+
 if not st.session_state.logged_in:
     login()
     signup_button = st.button('Sign Up')
@@ -113,5 +115,6 @@ else:
         print("working")
         running = stream(inp)
         if running:
+            st.write(f'Now playing: {get_name()}')
             st.markdown(f'<img src="data:image/gif;base64,{data_url}" class="gifimg" alt="musicgif">',unsafe_allow_html=True)
             st.button('Stop', on_click=pauseAndPlay)

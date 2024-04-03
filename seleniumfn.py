@@ -1,6 +1,7 @@
 from selenium import webdriver 
 from selenium.webdriver.common.by import By
 from selenium.webdriver.firefox.service import Service 
+import time
 
 # extension1 = "C://Users//user//Downloads//ublock_origin-1.55.0.xpi"
 options = webdriver.FirefoxOptions() 
@@ -41,6 +42,12 @@ def playnext(driver=driver):
 		print("playlist")
 	# nextvid.click()
 
+def get_name(driver=driver):
+	vid_title = driver.find_element(
+		"xpath", "/html/body/ytd-app/div[1]/ytd-page-manager/ytd-watch-flexy/div[5]/div[1]/div/div[2]/ytd-watch-metadata/div/div[1]/h1/yt-formatted-string")
+	time.sleep(2)
+	return vid_title.text
+
 def stop(driver=driver): 
 	driver.quit() 
 
@@ -59,6 +66,8 @@ if __name__ == "__main__":
 				pauseAndPlay()
 			elif uinput == 'next':
 				playnext()
+			elif uinput == 'name':
+				get_name()
 			elif uinput == "stop": 
 				stop() 
 
