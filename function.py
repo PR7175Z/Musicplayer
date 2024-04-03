@@ -66,6 +66,7 @@ def decode_password(password):
 
 # inserting user in db
 def insert_user(first_name, last_name, email, password):
+    password=encode_password(password)
     sql = """INSERT INTO users(first_name,last_name, email, password)
              VALUES(%s, %s, %s, %s) RETURNING user_id;"""
     

@@ -3,17 +3,14 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.firefox.service import Service 
 import time
 
-# extension1 = "C://Users//user//Downloads//ublock_origin-1.55.0.xpi"
 options = webdriver.FirefoxOptions() 
 user_agent = '--user-agent=Mozilla/5.0 (iPhone; CPU iPhone OS 10_3 like Mac OS X) AppleWebKit/602.1.50 (KHTML, like Gecko) CriOS/56.0.2924.75 Mobile/14E5239e Safari/602.1'
 options.add_argument(user_agent) 
 options.binary_location = r'C:\Program Files\Mozilla Firefox\firefox.exe'
 
-# options.add_argument("--headless") 
+options.add_argument("--headless") 
 options.add_argument("--log-level") 
 options.add_argument('--disable-application-cache') 
-# ser = Service("D:\\pythonlectures\\semprojectraw\\include\\geckodriver.exe") 
-# driver = webdriver.Firefox(service=ser, options=options) 
 driver = webdriver.Firefox(options=options) 
 
 extension1 = "D://pythonlectures//semprojectraw//include//ublock_origin-1.55.0.xpi"
@@ -40,7 +37,6 @@ def playnext(driver=driver):
 	print(nextvid.get_attribute("href"))
 	if '&list' in nextvid.get_attribute("href"):
 		print("playlist")
-	# nextvid.click()
 
 def get_name(driver=driver):
 	vid_title = driver.find_element(
@@ -51,13 +47,11 @@ def get_name(driver=driver):
 def stop(driver=driver): 
 	driver.quit() 
 
-# we need to use Stream {songname} for our player to stream the song 
 if __name__ == "__main__": 
 	print("Enter the name of song") 
 	while True: 
 		try:
 			uinput = str(input()) 
-			# splitting the uinput in 2 strings and access the first string 
 			if uinput.split(" ", 1)[0] == "st": 
 				songName = uinput.split(" ", 1)[1] 
 				print(songName)
