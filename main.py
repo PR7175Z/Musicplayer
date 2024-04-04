@@ -110,9 +110,11 @@ else:
     data_url = gifload("assets/images/music.gif")
 
     if searched:
-        print("working")
         running = stream(inp)
         if running:
             st.write(f'Now playing: {get_name()}')
+            st.write(f'Artist: {get_channel_name()}')
+            st.write(f'Views: {get_views()}')
+            st.write(f'Published: {get_date()}')
             st.markdown(f'<img src="data:image/gif;base64,{data_url}" class="gifimg" alt="musicgif">',unsafe_allow_html=True)
             st.button('Stop', on_click=pauseAndPlay)

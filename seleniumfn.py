@@ -41,8 +41,23 @@ def playnext(driver=driver):
 def get_name(driver=driver):
 	vid_title = driver.find_element(
 		"xpath", "/html/body/ytd-app/div[1]/ytd-page-manager/ytd-watch-flexy/div[5]/div[1]/div/div[2]/ytd-watch-metadata/div/div[1]/h1/yt-formatted-string")
-	time.sleep(2)
+	time.sleep(1.5)
 	return vid_title.text
+
+def get_channel_name(driver=driver):
+	channel_title = driver.find_element(
+		"xpath", "/html/body/ytd-app/div[1]/ytd-page-manager/ytd-watch-flexy/div[5]/div[1]/div/div[2]/ytd-watch-metadata/div/div[2]/div[1]/ytd-video-owner-renderer/div[1]/ytd-channel-name/div/div/yt-formatted-string/a")
+	return channel_title.text
+
+def get_views(driver=driver):
+	view_count = driver.find_element(
+		"xpath", "/html/body/ytd-app/div[1]/ytd-page-manager/ytd-watch-flexy/div[5]/div[1]/div/div[2]/ytd-watch-metadata/div/div[4]/div[1]/div/ytd-watch-info-text/div/yt-formatted-string/span[1]")
+	return view_count.text.split()[0]
+
+def get_date(driver=driver):
+	date = driver.find_element(
+		"xpath", "/html/body/ytd-app/div[1]/ytd-page-manager/ytd-watch-flexy/div[5]/div[1]/div/div[2]/ytd-watch-metadata/div/div[4]/div[1]/div/ytd-watch-info-text/div/yt-formatted-string/span[3]")
+	return date.text
 
 def stop(driver=driver): 
 	driver.quit() 
@@ -61,7 +76,10 @@ if __name__ == "__main__":
 			elif uinput == 'next':
 				playnext()
 			elif uinput == 'name':
-				get_name()
+				print(get_name())
+				print(get_channel_name())
+				print(get_views())
+				print(get_date())
 			elif uinput == "stop": 
 				stop() 
 
