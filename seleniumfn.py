@@ -8,7 +8,7 @@ user_agent = '--user-agent=Mozilla/5.0 (iPhone; CPU iPhone OS 10_3 like Mac OS X
 options.add_argument(user_agent) 
 options.binary_location = r'C:\Program Files\Mozilla Firefox\firefox.exe'
 
-options.add_argument("--headless") 
+# options.add_argument("--headless") 
 options.add_argument("--log-level") 
 options.add_argument('--disable-application-cache') 
 driver = webdriver.Firefox(options=options) 
@@ -32,11 +32,11 @@ def pauseAndPlay(driver=driver):
 
 def playnext(driver=driver):
 	nextvid = driver.find_element(
-		"xpath", "/html/body/ytd-app/div[1]/ytd-page-manager/ytd-watch-flexy/div[5]/div[2]/div/div[4]/ytd-watch-next-secondary-results-renderer/div[2]/ytd-compact-radio-renderer/div[1]/div[1]/ytd-thumbnail/a")
+		"xpath", "/html/body/ytd-app/div[1]/ytd-page-manager/ytd-watch-flexy/div[5]/div[2]/div/div[4]/ytd-watch-next-secondary-results-renderer/div[2]/ytd-compact-video-renderer[1]")
 	driver.implicitly_wait(1)
-	print(nextvid.get_attribute("href"))
-	if '&list' in nextvid.get_attribute("href"):
-		print("playlist")
+	print(nextvid.text)
+	# if '&list' in nextvid.get_attribute("href"):
+	# 	print("playlist")
 
 def get_name(driver=driver):
 	vid_title = driver.find_element(
