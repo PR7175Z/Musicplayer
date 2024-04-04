@@ -30,13 +30,14 @@ def pauseAndPlay(driver=driver):
     driver.implicitly_wait(1) 
     pauseVideo.click() 
 
-def playnext(driver=driver):
+def getnextvideolink(driver=driver):
+	nextvid_link = driver.find_element(
+		"xpath", "/html/body/ytd-app/div[1]/ytd-page-manager/ytd-watch-flexy/div[5]/div[2]/div/div[4]/ytd-watch-next-secondary-results-renderer/div[2]/ytd-compact-video-renderer[1]/div[1]/ytd-thumbnail/a")
 	nextvid = driver.find_element(
 		"xpath", "/html/body/ytd-app/div[1]/ytd-page-manager/ytd-watch-flexy/div[5]/div[2]/div/div[4]/ytd-watch-next-secondary-results-renderer/div[2]/ytd-compact-video-renderer[1]")
 	driver.implicitly_wait(1)
-	print(nextvid.text)
-	# if '&list' in nextvid.get_attribute("href"):
-	# 	print("playlist")
+	nextvid_link.click()
+	# print(nextvid_link.get_attribute("href"))
 
 def get_name(driver=driver):
 	vid_title = driver.find_element(
@@ -74,7 +75,7 @@ if __name__ == "__main__":
 			elif uinput == "play":
 				pauseAndPlay()
 			elif uinput == 'next':
-				playnext()
+				getnextvideolink()
 			elif uinput == 'name':
 				print(get_name())
 				print(get_channel_name())
