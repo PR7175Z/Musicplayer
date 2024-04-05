@@ -118,5 +118,4 @@ else:
             st.write(f'Published: {get_date()}')
             st.markdown(f'<img src="data:image/gif;base64,{data_url}" class="gifimg" alt="musicgif">',unsafe_allow_html=True)
             st.button('Next', on_click=getnextvideolink)
-            running = True
             st.button('Stop', on_click=pauseAndPlay)
