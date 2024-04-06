@@ -8,7 +8,7 @@ user_agent = '--user-agent=Mozilla/5.0 (iPhone; CPU iPhone OS 10_3 like Mac OS X
 options.add_argument(user_agent) 
 options.binary_location = r'C:\Program Files\Mozilla Firefox\firefox.exe'
 
-# options.add_argument("--headless") 
+options.add_argument("--headless") 
 options.add_argument("--log-level") 
 options.add_argument('--disable-application-cache') 
 driver = webdriver.Firefox(options=options) 
