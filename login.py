@@ -2,6 +2,7 @@ import streamlit as st
 import streamlit.components.v1 as components
 from streamlit.components.v1 import html
 from function import get_users, decode_password
+import time
 
 def checkcredential(email,password):
     corflag = 0
@@ -31,8 +32,10 @@ def login():
             corflag = checkcredential(email, password)
             if corflag==1:
                 st.session_state.logged_in = True
+                st.success('Login Successful')
+                time.sleep(1)
             else:
-                st.write('The provided credentials are not correct')
+                st.error('The provided credentials are not correct')
 
 if __name__ == "__main__":
     login()

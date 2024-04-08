@@ -21,12 +21,12 @@ def signup():
         if signuped:
             if(len(email)==0 or len(password)==0 or len(first_name)==0 or len(last_name)==0):
                 if len(email)==0:
-                    st.write('Username field is empty')
+                    st.error('Username field is empty')
                 if len(password)==0:
-                    st.write('Password field is empty')
+                    st.error('Password field is empty')
             else:
                 insert_user(first_name, last_name, email, password)
-                st.write("Signup successful, you can now login")
+                st.success("Signup successful, you can now login")
                 st.session_state.signup_completed = True
                 st.session_state.show_login = True
                 st.session_state.logged_in = True
