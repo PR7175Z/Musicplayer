@@ -18,9 +18,9 @@ header()
 def session_state():
     if 'logged_in' not in st.session_state:
         st.session_state.logged_in = False
-        st.session_state.show_login = True
-        st.session_state.show_signup = False
-        st.session_state.signup_completed = False
+        # st.session_state.show_login = True
+        # st.session_state.show_signup = False
+        # st.session_state.signup_completed = False
 
 session_state()
 
