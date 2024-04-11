@@ -26,33 +26,41 @@ session_state()
 
 import time
 
-if not st.session_state.logged_in:
-    login()
-    signup_button = st.button('Sign Up')
+tab1,tab2 = st.tabs(['Login', 'Sign up'])
 
-    if signup_button:
-        st.session_state.show_login = False
-        st.session_state.show_signup = True
+with tab1:
+    if not st.session_state.logged_in:
+        login()
+    
+with tab2:
+    signup()
+# if not st.session_state.logged_in:
+#     login()
+#     signup_button = st.button('Sign Up')
 
-    if st.session_state.show_signup:
-        signup()
-else:
-    with st.form('searchform', clear_on_submit=False):
-        row2col1, row2col2 = st.columns([0.8, 0.2])
-        with row2col1:
-            inp = st.text_input(' ', placeholder='Search Here...')
-        with row2col2:
-            searched = st.form_submit_button('Search')
+#     if signup_button:
+#         st.session_state.show_login = False
+#         st.session_state.show_signup = True
 
-    data_url = gifload("assets/images/music.gif")
+#     if st.session_state.show_signup:
+#         signup()
+# else:
+#     with st.form('searchform', clear_on_submit=False):
+#         row2col1, row2col2 = st.columns([0.8, 0.2])
+#         with row2col1:
+#             inp = st.text_input(' ', placeholder='Search Here...')
+#         with row2col2:
+#             searched = st.form_submit_button('Search')
 
-    if searched:
-        running = stream(inp)
-        if running:
-            st.write(f'Now playing: {get_name()}')
-            st.write(f'Artist: {get_channel_name()}')
-            st.write(f'Views: {get_views()}')
-            st.write(f'Published: {get_date()}')
-            st.markdown(f'<img src="data:image/gif;base64,{data_url}" class="gifimg" alt="musicgif">',unsafe_allow_html=True)
-            # st.button('Next', on_click=getnextvideolink)
-            st.button('Stop', on_click=pauseAndPlay)
+#     data_url = gifload("assets/images/music.gif")
+
+#     if searched:
+#         running = stream(inp)
+#         if running:
+#             st.write(f'Now playing: {get_name()}')
+#             st.write(f'Artist: {get_channel_name()}')
+#             st.write(f'Views: {get_views()}')
+#             st.write(f'Published: {get_date()}')
+#             st.markdown(f'<img src="data:image/gif;base64,{data_url}" class="gifimg" alt="musicgif">',unsafe_allow_html=True)
+#             # st.button('Next', on_click=getnextvideolink)
+#             st.button('Stop', on_click=pauseAndPlay)
