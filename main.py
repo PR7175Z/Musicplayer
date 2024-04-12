@@ -31,9 +31,15 @@ tab1,tab2 = st.tabs(['Login', 'Sign up'])
 with tab1:
     if not st.session_state.logged_in:
         login()
-    
+    else:
+        pass
 with tab2:
-    signup()
+    if not st.session_state.logged_in:
+        signup()
+    else:
+        pass
+
+
 # if not st.session_state.logged_in:
 #     login()
 #     signup_button = st.button('Sign Up')
