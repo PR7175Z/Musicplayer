@@ -2,6 +2,9 @@ import streamlit as st
 from seleniumfn import *
 from function import *
 
+hide_sidebar()
+header()
+
 with st.form('searchform', clear_on_submit=False):
     row2col1, row2col2 = st.columns([0.8, 0.2])
     with row2col1:

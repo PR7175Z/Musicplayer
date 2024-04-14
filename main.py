@@ -13,6 +13,8 @@ st.set_page_config(
     page_icon="🎵",
 )
 
+hide_sidebar()
+
 header()
 
 def session_state():
@@ -20,8 +22,6 @@ def session_state():
         st.session_state.logged_in = False
 
 session_state()
-
-import time
 
 tab1,tab2 = st.tabs(['Login', 'Sign up'])
 

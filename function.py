@@ -33,6 +33,9 @@ def header():
 			.gifimg{
 				width: 500px;
 			}
+            [data-testid="stHorizontalBlock"] {
+                align-items: center;
+            }
 		</style>
 		''',unsafe_allow_html=True
 	)
@@ -135,6 +138,15 @@ def nav_page(page_name, timeout_secs=3):
         </script>
     """ % (page_name, timeout_secs)
     html(nav_script)
+
+def hide_sidebar():
+    st.markdown("""
+    <style>
+        section[data-testid="stSidebar"][aria-expanded="true"]{
+            display: none;
+        }
+    </style>
+    """, unsafe_allow_html=True)
 
 
 if __name__ == "__main__":
