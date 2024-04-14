@@ -19,5 +19,4 @@ if searched:
         st.write(f'Views: {get_views()}')
         st.write(f'Published: {get_date()}')
         st.markdown(f'<img src="data:image/gif;base64,{data_url}" class="gifimg" alt="musicgif">',unsafe_allow_html=True)
-        # st.button('Next', on_click=getnextvideolink)
         st.button('Stop', on_click=pauseAndPlay)

@@ -18,9 +18,6 @@ header()
 def session_state():
     if 'logged_in' not in st.session_state:
         st.session_state.logged_in = False
-        # st.session_state.show_login = True
-        # st.session_state.show_signup = False
-        # st.session_state.signup_completed = False
 
 session_state()
 
@@ -32,12 +29,12 @@ with tab1:
     if not st.session_state.logged_in:
         login()
     else:
-        pass
+        nav_page('search')
 with tab2:
     if not st.session_state.logged_in:
         signup()
     else:
-        pass
+        nav_page('search')
 
 
 # if not st.session_state.logged_in:
