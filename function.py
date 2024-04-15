@@ -150,6 +150,5 @@ def hide_sidebar():
 
 
 if __name__ == "__main__":
-    # insert_user("adam", "eve", "adameve@gmail.com", "test")
     print(get_users())
     
