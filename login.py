@@ -16,6 +16,8 @@ def checkcredential(email,password):
         for x in users:
             if email == x[1] and password == decode_password(x[2]):
                 corflag = 1
+                st.session_state.logged_in_id = x[0]
+
     return corflag
 
     

@@ -1,6 +1,7 @@
 from selenium import webdriver 
 from selenium.webdriver.common.by import By
 from selenium.webdriver.firefox.service import Service 
+import streamlit as st
 import time
 
 options = webdriver.FirefoxOptions() 
@@ -17,12 +18,15 @@ extension1 = "D://pythonlectures//semprojectraw//include//ublock_origin-1.55.0.x
 driver.install_addon(extension1, temporary=True) 
 
 def stream(MusicName, driver=driver):
-	driver.get(f"https://www.youtube.com/results?search_query={MusicName}") 
-	driver.implicitly_wait(0.5)
-	video = driver.find_element( 
-		"xpath", "/html/body/ytd-app/div[1]/ytd-page-manager/ytd-search/div[1]/ytd-two-column-search-results-renderer/div[1]/ytd-section-list-renderer/div[2]/ytd-item-section-renderer/div[3]/ytd-video-renderer[1]/div[1]/div/div[1]/div/h3/a/yt-formatted-string") 
-	video.click()
-	return True
+	try:
+		driver.get(f"https://www.youtube.com/results?search_query={MusicName}") 
+		driver.implicitly_wait(0.5)
+		video = driver.find_element( 
+			"xpath", "/html/body/ytd-app/div[1]/ytd-page-manager/ytd-search/div[1]/ytd-two-column-search-results-renderer/div[1]/ytd-section-list-renderer/div[2]/ytd-item-section-renderer/div[3]/ytd-video-renderer[1]/div[1]/div/div[1]/div/h3/a/yt-formatted-string") 
+		video.click()
+		return True
+	except:
+		st.error("No internet Connection")
 
 def pauseAndPlay(driver=driver): 
     pauseVideo = driver.find_element( 

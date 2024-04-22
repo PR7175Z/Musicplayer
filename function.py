@@ -113,6 +113,51 @@ def get_users():
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
 
+# inserting history in db
+def insert_history(user_id, history_val, date_time):
+    sql = """INSERT INTO history(user_id, history_val, date_time)
+             VALUES(%s, %s, %s) RETURNING history_id;"""
+    
+    history_id = None
+    config = load_config()
+
+    try:
+        with  psycopg2.connect(**config) as conn:
+            with  conn.cursor() as cur:
+                # execute the INSERT statement
+                cur.execute(sql, (user_id, history_val, date_time))
+
+                # get the generated id back                
+                rows = cur.fetchone()
+                if rows:
+                    history_id = rows[0]
+
+                # commit the changes to the database
+                conn.commit()
+    except (Exception, psycopg2.DatabaseError) as error:
+        print(error)    
+    finally:
+        return history_id
+
+#Retrieve data from the users table
+def get_history(cur_user_id):
+    config  = load_config()
+    userdata = []
+    try:
+        with psycopg2.connect(**config) as conn:
+            with conn.cursor() as cur:
+                cur.execute("SELECT user_id, history_val, date_time FROM history where user_id = %s", (cur_user_id,))
+                # print("The number of parts: ", cur.rowcount)
+                row = cur.fetchone()
+
+                while row is not None:
+                    userdata.append(row)
+                    row = cur.fetchone()
+                return userdata
+
+    except (Exception, psycopg2.DatabaseError) as error:
+        print(error)
+
 #page navigation
 def nav_page(page_name, timeout_secs=3):
     nav_script = """
