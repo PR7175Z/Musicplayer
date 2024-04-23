@@ -2,6 +2,8 @@ import streamlit as st
 from seleniumfn import *
 from function import *
 from datetime import datetime
+import pandas as pd
+import numpy as np
 
 hide_sidebar()
 header()
@@ -35,6 +37,9 @@ with tab1:
 with tab2:
     history = get_history(cur_userid)
     if history:
-        
-        for x in history:
-            st.write(x[1], x[2])
+        name = [x[1] for x in history]
+        dt = [x[2] for x in history]
+
+        df = pd.DataFrame({'Name':name, 'Date & time':dt})
+        df.index = np.arange(1, len(df)+1)
+        st.write(df)
