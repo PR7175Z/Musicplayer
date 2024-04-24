@@ -8,9 +8,9 @@ def checkcredential(email,password):
     corflag = 0
     if(len(email)==0 or len(password)==0):
         if len(email)==0:
-            st.write('Username field is empty')
+            st.error('Username field is empty')
         if len(password)==0:
-            st.write('Password field is empty')
+            st.error('Password field is empty')
     else:
         users = get_users()
         for x in users:

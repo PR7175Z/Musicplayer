@@ -37,11 +37,13 @@ with tab1:
 with tab2:
     history = get_history(cur_userid)
     if history:
-        name = [x[1] for x in history]
-        dt = [x[2] for x in history]
-        btn = [f'<a data-historyid="{history[x][0]}">delete</a>' for x in range(len(history))]
+        name = [x[2] for x in history]
+        dt = [x[3] for x in history]
+        btn = [f'<a class="delete-btn" data-historyid="{history[x][0]}">delete</a>' for x in range(len(history))]
 
-        df = pd.DataFrame({'Name':name, 'Date & time':dt, '':btn})
+        df = pd.DataFrame({'Name':name, 'Date & time':dt, 'Delete': [''] * len(history)})
+        # for i in range(len(history)):
+        #     df.at[i, 'Delete'] = st.button(f"Delete", key=history[i][0])
         
         df.index = np.arange(1, len(df)+1)
         st.write(df.to_html(escape=False, index=False), unsafe_allow_html=True)

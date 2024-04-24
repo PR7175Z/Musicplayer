@@ -146,7 +146,7 @@ def get_history(cur_user_id):
     try:
         with psycopg2.connect(**config) as conn:
             with conn.cursor() as cur:
-                cur.execute("SELECT user_id, history_val, date_time FROM history where user_id = %s", (cur_user_id,))
+                cur.execute("SELECT history_id, user_id, history_val, date_time FROM history where user_id = %s", (cur_user_id,))
                 # print("The number of parts: ", cur.rowcount)
                 row = cur.fetchone()
 

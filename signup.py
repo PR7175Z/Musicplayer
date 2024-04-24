@@ -2,6 +2,7 @@ import streamlit as st
 import streamlit.components.v1 as components
 from streamlit.components.v1 import html
 from function import insert_user
+import re
 
 def signup():
     # if 'show_signup' not in st.session_state:
@@ -19,17 +20,17 @@ def signup():
         signuped = st.form_submit_button('Submit')
 
     if signuped:
+        regex = r'^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w+$'
         if(len(email)==0 or len(password)==0 or len(first_name)==0 or len(last_name)==0):
             if len(email)==0:
                 st.error('Username field is empty')
             if len(password)==0:
                 st.error('Password field is empty')
+        elif not re.fullmatch(regex, email):
+            st.error('The provided email is incorrect. Example: example@domain.com')
         else:
-            insert_user(first_name, last_name, email, password)
-            st.success("Signup successful, you can now login")
-            # st.session_state.signup_completed = True
-            # st.session_state.show_login = True
             st.session_state.logged_in = True
+            st.success("Signup successful, you can now login")
         
 
 if __name__ == "__main__":
