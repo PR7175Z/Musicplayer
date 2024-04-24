@@ -39,7 +39,9 @@ with tab2:
     if history:
         name = [x[1] for x in history]
         dt = [x[2] for x in history]
+        btn = [f'<a data-historyid="{history[x][0]}">delete</a>' for x in range(len(history))]
 
-        df = pd.DataFrame({'Name':name, 'Date & time':dt})
+        df = pd.DataFrame({'Name':name, 'Date & time':dt, '':btn})
+        
         df.index = np.arange(1, len(df)+1)
-        st.write(df)
+        st.write(df.to_html(escape=False, index=False), unsafe_allow_html=True)
