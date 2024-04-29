@@ -36,12 +36,27 @@ with tab1:
 
 with tab2:
     history = get_history(cur_userid)
+
     if history:
         name = [x[2] for x in history]
         dt = [x[3] for x in history]
-        btn = [f'<a class="delete-btn" data-historyid="{history[x][0]}">delete</a>' for x in range(len(history))]
+        btn = [f'<button class="delete-btn" onclick="{deletehistory(history[x][0])}" id="deletebtn{history[x][0]}" data-historyid="{history[x][0]}">delete</button>' for x in range(len(history))]
 
-        df = pd.DataFrame({'Name':name, 'Date & time':dt, 'Delete': [''] * len(history)})
+        df = pd.DataFrame({'Name':name, 'Date & time':dt, 'Delete': btn})
+        st.markdown('''
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    console.log('check');
+                    var delbtns = document.getElementsByClassName("delete-btn");
+                    for (var i = 0; i < delbtns.length; i++) {
+                        delbtns[i].addEventListener("click", function(){
+                            console.log('click');
+                            // You can add logic to trigger the Python function here
+                        });
+                    }
+                });
+            </script>
+        ''', unsafe_allow_html=True)
         # for i in range(len(history)):
         #     df.at[i, 'Delete'] = st.button(f"Delete", key=history[i][0])
         

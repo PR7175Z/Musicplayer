@@ -158,6 +158,10 @@ def get_history(cur_user_id):
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
 
+def deletehistory(historyid):
+    print(historyid)
+    print('history deleted')
+
 #page navigation
 def nav_page(page_name, timeout_secs=3):
     nav_script = """
