@@ -159,8 +159,15 @@ def get_history(cur_user_id):
         print(error)
 
 def deletehistory(historyid):
-    print(historyid)
-    print('history deleted')
+    config  = load_config()
+    try:
+        with psycopg2.connect(**config) as conn:
+            with conn.cursor() as cur:
+                cur.execute("DELETE FROM history WHERE history_id = %s", (historyid,))
+                conn.commit()
+                
+    except (Exception, psycopg2.DatabaseError) as error:
+        print(error)
 
 #page navigation
 def nav_page(page_name, timeout_secs=3):
