@@ -40,8 +40,15 @@ def getnextvideolink(driver=driver):
 	nextvid = driver.find_element(
 		"xpath", "/html/body/ytd-app/div[1]/ytd-page-manager/ytd-watch-flexy/div[5]/div[2]/div/div[4]/ytd-watch-next-secondary-results-renderer/div[2]/ytd-compact-video-renderer[1]")
 	driver.implicitly_wait(1)
-	nextvid_link.click()
+	print(nextvid_link)
+	print(nextvid)
 	# print(nextvid_link.get_attribute("href"))
+ 
+def getnextvidname(driver=driver):
+	nextvidname = driver.find_element(
+		"xpath", "/html/body/ytd-app/div[1]/ytd-page-manager/ytd-watch-flexy/div[5]/div[2]/div/div[4]/ytd-watch-next-secondary-results-renderer/div[2]/ytd-compact-video-renderer[1]/div[1]/div/div[1]/a/h3/span")
+	driver.implicitly_wait(1)
+	print(nextvidname.text)
 
 def get_name(driver=driver):
 	vid_title = driver.find_element(

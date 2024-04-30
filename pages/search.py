@@ -33,6 +33,7 @@ with tab1:
             st.markdown(f'<img src="data:image/gif;base64,{data_url}" class="gifimg" alt="musicgif">',unsafe_allow_html=True)
             insert_history(cur_userid, name, date_time)
             st.button('Stop', on_click=pauseAndPlay)
+            st.button('Next', on_click=getnextvidname)
 
 with tab2:
     history = get_history(cur_userid)
@@ -42,7 +43,6 @@ with tab2:
         with col1:
             name = [x[2] for x in history]    
             dt = [x[3] for x in history]
-            # btn = [f'<button class="delete-btn" onclick="{deletehistory(history[x][0])}" id="deletebtn{history[x][0]}" data-historyid="{history[x][0]}">delete</button>' for x in range(len(history))]
 
             df = pd.DataFrame({'Name':name, 'Date & time':dt})
             
