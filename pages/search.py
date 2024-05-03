@@ -22,18 +22,19 @@ with tab1:
     data_url = gifload("assets/images/music.gif")
 
     if searched:
-        running = stream(inp)
-        if running:
-            date_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-            name = get_name()
-            st.write(f'Now playing: {name}')
-            st.write(f'Artist: {get_channel_name()}')
-            st.write(f'Views: {get_views()}')
-            st.write(f'Published: {get_date()}')
-            st.markdown(f'<img src="data:image/gif;base64,{data_url}" class="gifimg" alt="musicgif">',unsafe_allow_html=True)
-            insert_history(cur_userid, name, date_time)
-            st.button('Stop', on_click=pauseAndPlay)
-            st.button('Next', on_click=getnextvidname)
+        stream(inp)
+        # running = stream(inp)
+        # if running:
+        #     date_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        #     name = get_name()
+        #     st.write(f'Now playing: {name}')
+        #     st.write(f'Artist: {get_channel_name()}')
+        #     st.write(f'Views: {get_views()}')
+        #     st.write(f'Published: {get_date()}')
+        #     st.markdown(f'<img src="data:image/gif;base64,{data_url}" class="gifimg" alt="musicgif">',unsafe_allow_html=True)
+        #     insert_history(cur_userid, name, date_time)
+        #     st.button('Stop', on_click=pauseAndPlay)
+        #     st.button('Next', on_click=getnextvidname)
 
 with tab2:
     history = get_history(cur_userid)

@@ -3,6 +3,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.firefox.service import Service 
 import streamlit as st
 import time
+from datetime import datetime
+from function import *
 
 options = webdriver.FirefoxOptions() 
 user_agent = '--user-agent=Mozilla/5.0 (iPhone; CPU iPhone OS 10_3 like Mac OS X) AppleWebKit/602.1.50 (KHTML, like Gecko) CriOS/56.0.2924.75 Mobile/14E5239e Safari/602.1'
@@ -24,7 +26,17 @@ def stream(MusicName, driver=driver):
 		video = driver.find_element( 
 			"xpath", "/html/body/ytd-app/div[1]/ytd-page-manager/ytd-search/div[1]/ytd-two-column-search-results-renderer/div[1]/ytd-section-list-renderer/div[2]/ytd-item-section-renderer/div[3]/ytd-video-renderer[1]/div[1]/div/div[1]/div/h3/a/yt-formatted-string") 
 		video.click()
-		return True
+		cur_userid = st.session_state.logged_in_id
+		date_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+		name = get_name()
+		st.write(f'Now playing: {name}')
+		st.write(f'Artist: {get_channel_name()}')
+		st.write(f'Views: {get_views()}')
+		st.write(f'Published: {get_date()}')
+		# st.markdown(f'<img src="data:image/gif;base64,{data_url}" class="gifimg" alt="musicgif">',unsafe_allow_html=True)
+		insert_history(cur_userid, name, date_time)
+		st.button('Stop', on_click=pauseAndPlay)
+		st.button('Next', on_click=getnextvidname)
 	except:
 		st.error("No internet Connection")
 
@@ -48,6 +60,7 @@ def getnextvidname(driver=driver):
 	nextvidname = driver.find_element(
 		"xpath", "/html/body/ytd-app/div[1]/ytd-page-manager/ytd-watch-flexy/div[5]/div[2]/div/div[4]/ytd-watch-next-secondary-results-renderer/div[2]/ytd-compact-video-renderer[1]/div[1]/div/div[1]/a/h3/span")
 	driver.implicitly_wait(1)
+	stream(nextvidname.text)
 	print(nextvidname.text)
 
 def get_name(driver=driver):
